@@ -1,0 +1,51 @@
+1.  What are the advantages and disadvantages of each of the two scheduling policies? 
+	Also, give the advantages and disadvantages of the round robin scheduling policy originally implemented in Xinu.
+
+Ans.
+	The advantages and disadvantages of the two scheduling policies are:
+	(a) Random Priority Scheduling 
+		Advantages:
+			1. The random priority scheduling prevents starvation of low priority processes by selecting process in random.
+			2. It gives CPU time to all the process, high-priority processes and even low-priority processes.
+		
+		Disadvantages:
+			1. A low priority process will get CPU time, but it will be very small bursts of CPU only as most of the CPU time
+			   (50 %) is given to the first Queue.
+	
+	(b) Linu-Like Scheduling
+		Advantages:
+			1. Using linux-like scheduling, it gives every process a chance to run. Process which does not have used CPU time
+			   in last epoch, is given more priority in next epoch to run. So a low priority process which didn't execute last time,
+			   will get more CPU next time.
+			2. Linux-like scheduling gives CPU time to low-priority process and simultaneously ensures that a high priority process
+			   is finished before other low priority processes.
+		
+		Disadvantages:
+			1. In this scheduling, all the new processes created in middle of epoch are waiting till the epoch finishes. This means,
+			   a very high priority process will wait till the epoch finishes and then it start executing.
+	
+	(c) Original Round-robin scheduling
+		Advantages:
+			1. It gives preference to high priority processes. So the processes which have high priority are finished first and then
+			   low priority processes are scheduled.
+		
+		Disadvantages:
+			1. A low priority process will be starved to death. The high priority process will every time be scheduled and low priority
+			   process will never be scheduled.
+
+			   
+			   
+2. Describe the way each of the schedulers affects the NULL process.
+
+Ans. 
+	1. Random-priority Scheduling
+		In the random priority scheduling, the NULL process is put in the lowest priority queue. As a result the NULL process is executed 
+		when it is in front of queue i.e. after the processes in third queue, which were put in arrival time order, have finished their quantum.
+		
+		Since, most of the time the highest priority queue is selected, therefore, the system spends less time executing the NULL process.
+	
+	2. Linux-like Scheduling
+		In linux-like scheduling, the NULL process is rarely executed because its priority is 0 and its unused quantum will also be zero.
+		Therefore, in every epoch in linux like scheduling, whenever the NULL process is selected for running, the scheduler sees the goodness and
+		quantum ofNULL process is 0. Hence, it switches to another process in ready queue. In this way the NULL process is executed after every other processes
+		have finished executing.
