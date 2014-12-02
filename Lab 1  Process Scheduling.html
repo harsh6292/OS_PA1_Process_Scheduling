@@ -1,0 +1,911 @@
+
+<!-- saved from url=(0055)http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/ -->
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 12">
+<meta name="Originator" content="Microsoft Word 12">
+<link rel="File-List" href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/lab1new_files/filelist.xml">
+<link rel="Edit-Time-Data" href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/lab1new_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Lab 1: Process Scheduling </title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Xuxian Jiang</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Xuxian Jiang</o:LastAuthor>
+  <o:Revision>38</o:Revision>
+  <o:TotalTime>32</o:TotalTime>
+  <o:Created>2008-12-04T13:31:00Z</o:Created>
+  <o:LastSaved>2008-12-04T14:06:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>1814</o:Words>
+  <o:Characters>10341</o:Characters>
+  <o:Lines>86</o:Lines>
+  <o:Paragraphs>24</o:Paragraphs>
+  <o:CharactersWithSpaces>12131</o:CharactersWithSpaces>
+  <o:Version>12.00</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<link rel="themeData" href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/lab1new_files/themedata.thmx">
+<link rel="colorSchemeMapping" href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/lab1new_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>150</w:Zoom>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>ZH-CN</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="true"
+  DefSemiHidden="true" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="267">
+  <w:LsdException Locked="false" Priority="0" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" Name="toc 9"/>
+  <w:LsdException Locked="false" Priority="35" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" Priority="10" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" Priority="1" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" Priority="11" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" Priority="22" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" Priority="59" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Table Grid"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" UnhideWhenUsed="false" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" SemiHidden="false"
+   UnhideWhenUsed="false" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" SemiHidden="false"
+   UnhideWhenUsed="false" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" QFormat="true" Name="TOC Heading"/>
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:\5B8B\4F53;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:1;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 0 0 0 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 680460288 22 0 262145 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+h2
+	{mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-link:"Heading 2 Char";
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-noshow:yes;
+	mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-style-priority:99;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{mso-style-priority:34;
+	mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-type:export-only;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-add-space:auto;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:minor-fareast;}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-noshow:yes;
+	mso-style-priority:9;
+	mso-style-unhide:no;
+	mso-style-locked:yes;
+	mso-style-link:"Heading 2";
+	mso-ansi-font-size:13.0pt;
+	mso-bidi-font-size:13.0pt;
+	font-family:"Cambria","serif";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:major-latin;
+	mso-fareast-font-family:SimSun;
+	mso-fareast-theme-font:major-fareast;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:major-latin;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:major-bidi;
+	color:#4F81BD;
+	mso-themecolor:accent1;
+	font-weight:bold;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	mso-default-props:yes;
+	font-size:10.0pt;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:149947432;
+	mso-list-template-ids:745546948;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:304630010;
+	mso-list-template-ids:-870129390;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:1576545451;
+	mso-list-template-ids:-1575042024;}
+@list l2:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;}
+@list l3
+	{mso-list-id:1963731092;
+	mso-list-template-ids:1549718538;}
+@list l3:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<style type="text/css"></style></head>
+
+<body lang="EN-US" link="blue" vlink="purple">
+
+<div class="Section1">
+
+<h2 align="center" style="text-align:center"><span style="mso-fareast-font-family:
+&quot;Times New Roman&quot;">CSC501 Spring 2009<o:p></o:p></span></h2>
+
+<h2 align="center" style="text-align:center"><span style="mso-fareast-font-family:
+&quot;Times New Roman&quot;">Lab 1: Process Scheduling<o:p></o:p></span></h2>
+
+<h2 align="center" style="text-align:center"><span style="mso-fareast-font-family:
+&quot;Times New Roman&quot;">Due: Feb. 10th 2009, 11:45PM<o:p></o:p></span></h2>
+
+<h2><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">1. Objectives<o:p></o:p></span></h2>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">The
+objectives of this lab are to get</span> familiar with the concepts of process
+management like process priorities, scheduling and context switching<span style="mso-fareast-font-family:&quot;Times New Roman&quot;">. <o:p></o:p></span></p>
+
+<div class="MsoNormal" align="center" style="text-align:center"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">
+
+<hr size="2" width="100%" align="center">
+
+</span></div>
+
+<h2><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">2. Readings<o:p></o:p></span></h2>
+
+<ol start="1" type="1">
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo1;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">The xinu source code (in sys/), especially those related
+     to process creation (create.c,), scheduling (resched.c, resume.c suspend.c),
+     termination (kill.c), priority change (chprio.c), as well as other related
+     utility programs (e.g., ready.c) and system initialization code (initialize.c)
+     etc.<o:p></o:p></span></li>
+</ol>
+
+<div class="MsoNormal" align="center" style="text-align:center"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">
+
+<hr size="2" width="100%" align="center">
+
+</span></div>
+
+<h2><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">3. What to do<o:p></o:p></span></h2>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">You
+will also be using the lab0-spring09.tgz you have downloaded and compiled by
+following the <a href="http://www.csc2.ncsu.edu/faculty/xjiang4/csc501/labs/setup.html">lab
+setup guide</a>. But you need to rename the whole directory to </span>csc501-lab1.<span style="mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+
+<p>This lab is divided into two parts. In the first part you will fix some
+flaws that are in <i>chprio()</i>. In the second part you will implement two
+new scheduling policies that will avoid <i>starvation</i> between processes. At
+the end of this lab you will be able to explain the advantages and
+disadvantages of the two new scheduling policies. </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Starvation is produced in Xinu
+when we have two or more processes eligible for execution that have different
+priorities. The scheduling invariant&nbsp; in Xinu&nbsp; assumes that at any
+time, the highest priority process eligible for CPU service is executing, with
+round-robin scheduling for processes of equal priority. Under this scheduling
+policy, the processes with the highest priority will always be executing. As a
+result, all the processes with lower priority will never get CPU time. You may
+test this condition by running <i><a href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/test1.c">test1.c</a></i> and <i><a href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/test2.c">test2.c</a></i>&nbsp;. </p>
+
+<p><b>Part 1:</b> Run the test programs <i><a href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/test3.c">test3.c</a></i>,
+and <i><a href="http://www.csc.ncsu.edu/faculty/jiang/csc501/labs/lab1/test4.c">test4.c</a></i>. Check if the function <i>chprio()</i>
+executes correctly. Fix any bug(s) that you find and verify that the test files
+run correctly with your modifications. </p>
+
+<p><b>Part 2:</b> Now you will be implementing two new scheduling policies that
+will avoid <i>starvation</i>. </p>
+
+<p>The first scheduling policy is a <b>random scheduler</b>. This scheduler
+will choose at random a process eligible for execution. The probability of
+choosing a specific process will be proportional to its priority. For example,
+assume that there are three processes eligible for execution P1, P2, and P3
+(each of them is either in the ready list or is the current process) with
+priorities 30, 20, and 10. The <i>total-sum</i> of those priorities is 60. The
+goal of the random scheduler is to allocate the CPU with a probability of 30/60
+to P1, 20/60 to P2, and 10/60 to P3. </p>
+
+<p>To accomplish this, each time a rescheduling happens, the scheduler will
+generate a random number between 0 and <i>total-sum</i> minus 1 (0 to 59 in
+this case). If the random number is less than the <i>priority</i> of the first
+process in the list of processes eligible for execution, then the scheduler
+schedules this process for execution. Otherwise, the random number is decreased
+by <i>priority</i> units and it goes to the next process in the list and so on.
+For example assume that the random number generated was 38, and the first
+process in the list is P1. As 38 is not less than 30, we decrease the number 38
+by 30 and we go to the next process in the list. As 8 is less than 20, then the
+scheduler will choose P2 for execution. In your implementation you may use the <i>srand()
+</i>and<i> rand()</i> functions, as implemented in ./lib/libxc/rand.c.  </p>
+
+<p>&nbsp;&nbsp;&nbsp; The second scheduling policy is a <b>proportional sharing
+policy.</b> First the policy will be explained and then we will give pointers
+as to how to adapt this to XINU. </p>
+
+<p>&nbsp;&nbsp;&nbsp; Every process has a scheduling parameter called the <i>rate.
+</i>For a process i let us denote the <i>rate </i>as Ri. Every process <i>i </i>has
+a <i>priority value </i>Pi. Initially, all the processes start with a <i>priority
+value 0 </i>( Pi = 0 ). Whenever a rescheduling occurs, the <i>priority
+value&nbsp;</i> Pi of the<b> currently</b> running process is updated as
+follows, </p>
+
+<p>&nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pi&nbsp; : =&nbsp; Pi + ( t x 100 / Ri ).</b> </p>
+
+<p>&nbsp;&nbsp;&nbsp; where <b>t </b>is the CPU ticks consumed by the process
+since the last update of Pi. Ri is a percentage value and takes values between
+0 and 100. </p>
+
+<p>&nbsp;&nbsp;&nbsp; Now the scheduler schedules a runnable process with the <i>smallest
+</i>Pi. Whenever a process is scheduled the first time or is scheduled after
+blocking, its Pi value is updated&nbsp; as follows, </p>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pi&nbsp; : =&nbsp; max ( Pi, T ).</b> </p>
+
+<p>&nbsp;&nbsp;&nbsp; where T is the number of CPU ticks that have elapsed
+since the start of the system. A safe assumption of the number of the CPU ticks
+would be number of QUANTAMs ( as defined in Xinu ), that have elapsed so far
+since the start of the system. </p>
+
+<p>&nbsp;&nbsp;&nbsp; Intuitively, you can think of this policy as one that
+gives the processes some guarentees about their CPU share. If a process has a
+rate Ri, then it is guarenteed atleast Ri percent of CPU time, provided the sum
+of all Ri values is less than 100. As the CPU usage of a process increases, its
+Pi value also increases depending on its Ri. If you have a large Ri, then your
+Pi increases more slowly and hence giving you a larger share of the CPU. Thus,
+Ri can be considered as a <i>share </i>of the CPU for the process <i>i. </i>The
+second formula can be intuitively understood from the following example. <br>
+&nbsp; </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Consider two processes A, B&nbsp; starting at time
+0 and running continuously with rate 50 and 40 respectively. Let us say that
+another process C is created after 100,000&nbsp; ticks with rate 10. C will
+start executing with a 0 priority and hence will hog the CPU for a very long
+time and processes A, B have to wait for long to get the CPU back and would not
+enjoy their share of the CPU till all the Pi values level off&nbsp; On the
+other hand, if the process C starts with a priority 100,000 instead of 0, then
+it will run only for a short amount of time before yielding the CPU back to A
+and B. </p>
+
+<p>&nbsp;&nbsp;&nbsp; According to this policy, the processes are scheduled in
+increasing order of their priority (ie) the process with the lowest priority
+value Pi will be scheduled first. But, Xinu works in exactly the opposite way
+(ie) the process with the highest priority&nbsp; is scheduled. In order to
+overcome this mismatch, we can maintain an internal variable Pi for every
+process which will contain the <i>priority value.</i> Let us denote the Xinu
+process priority of a process <i>i </i>to be PRIOi. Then PRIOi can be
+calculated as <b>PRIOi = MAXINT - Pi. </b>As Pi increases, PRIOi decreases and
+the process will get lesser share of CPU. <br>
+&nbsp; </p>
+
+<p>To summarize, at every reschedule operation the scheduler does the
+following, </p>
+
+<p>&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; the Pi value of the current process is
+modified and its PRIOi value updated. <br>
+&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; the scheduler chooses for execution the
+process with the highest priority, choosing from the processes in the ready list
+<i>and</i> the current process. <br>
+Also, whenever a process is scheduled for the first time or immediately after
+blocking, then the Pi value is changed as indicated above and the PRIOi is
+updated to reflect the change. (You, have to identify when and how to change
+Pi) </p>
+
+<p>&nbsp;&nbsp;&nbsp; The two scheduling policies should work simultaneously in
+Xinu. The scheduling policies are on a per process basis. Whenever a process is
+created in Xinu, it should have either of the two policies. This can be
+implemented by adding an additional parameter to the Create system call. The
+new prototype of the create system call would be, </p>
+
+<p>&nbsp;&nbsp;&nbsp;<b> SYSCALL create ( int *procaddr, int ssize, int
+priority, int spolicy, char *name, int nargs, long args );</b> </p>
+
+<p>The parameter spolicy would be either RANDOMSCHED or PROPORTIONALSHARE. If
+otherwise, SYSERR should be returned. In the case of RANDOMSCHED, the parameter
+priority would indicate the Xinu process priority value. But in the case of
+proportional share it would indicate the 'rate' of the process. The internal
+priority value P should be made zero and hence the Xinu process priority value
+should be made MAXINT. </p>
+
+<p>The following macros are defined in proc.h </p>
+
+<p>#define <span style="font-size:10.0pt">RANDOMSCHED&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1</span> <br>
+#define <span style="font-size:10.0pt">PROPORTIONALSHARE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+2</span> </p>
+
+<p>To make the two scheduling policies work simultaneously, implement the
+following in <i>resched() </i>: </p>
+
+<ul type="disc">
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">If there are processes with RANDOMSCHED policy in the
+     ready list, then a random number between 0 and 99 will be generated. If it
+     is less than a variable <i>rsfrequency</i> (that you will define), then a
+     process of policy of RANDOMSCHED will be chosen as described above.
+     Otherwise a process of policy PROPORTIONAL SHARE&nbsp;will be chosen. The
+     variable <i>rsfrequency</i> will be set using the procedure <i>sfrequency(rsfrequency)
+     </i>that you will also define. <i>rsfrequency</i> will have the default
+     value of 50.<o:p></o:p></span></li>
+</ul>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">Note,
+that the behavior r of chprio(pid, priority) will also change depending upon
+the scheduling policy of the process. If the process is a randomly scheduled
+process, then the parameter priority is the usual Xinu process priority. In the
+case of a proportional share process, the parameter priority represents the
+'rate' of the process. <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+
+<div class="MsoNormal" align="center" style="text-align:center"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">
+
+<hr size="2" width="100%" align="center">
+
+</span></div>
+
+<h2><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">4. Additional
+Questions<o:p></o:p></span></h2>
+
+<p class="MsoNormal"><b><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;</span></b><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">&nbsp; Write your answers to
+the following questions in a file named <b>Lab1Answers.txt</b>(in simple text).
+Please place this file in the <b>sys/</b> directory and turn it in, along with
+the above programming assignment. </span><span style="mso-spacerun:yes">�</span></p>
+
+<ol start="1" type="1">
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo4;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">What are the advantages and disadvantages of each of
+     the two scheduling policies? Also give the advantages and disadvantages of
+     the round robin scheduling&nbsp;policy originally implemented in Xinu.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo4;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">Assume that there are three processes P1, P2, P3 that
+     will run forever without blocking. We want to allocate the following CPU
+     times to each of them: 50% to P1, 30% to P2, and 20% to P3. Which
+     priorities do we need to set to P1, P2, and P3 to accomplish this if we
+     want to use the Random scheduler?&nbsp; Assume that those processes are
+     the only ones running in the machine. Could you give a generalization of
+     your result to <i>n</i> processes? Explain.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo4;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">We want to get the same effect as that of a
+     proportional share scheduler with the Random scheduler for a given set of
+     processes and their 'rate's. Can we? Explain.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo4;tab-stops:list .5in"><span style="mso-fareast-font-family:
+     &quot;Times New Roman&quot;">Describe the way each of the schedulers affects the
+     NULL process.<o:p></o:p></span></li>
+</ol>
+
+<p class="MsoNormal" style="margin-left:.5in"><span style="mso-fareast-font-family:
+&quot;Times New Roman&quot;">For the proportional share scheduler, try the following
+scenario. Create two processes A and B with rates 0.7 and 0.3 respectively.
+Both processes should basically be continuously computing (except as noted
+below) and periodically printing some output to the console so that you can
+track their progress. Let both processes run for 20 seconds. At 20 seconds, let
+A sleep for 60 seconds, while allowing B to continue running. When A wakes up
+at 80 seconds, what happens? What does that tell you about the fairness of the
+scheduler, and why might it cause problems for certain applications? How might
+you adapt the algorithm to solve the problem? <br>
+&nbsp;<o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">If
+you have any questions, post them to the class <b>message board. <i>Please
+avoid mailing your questions to TAs email accounts.</i></b> <o:p></o:p></span></p>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;"><o:p>&nbsp;</o:p></span></p>
+
+<div class="MsoNormal" align="center" style="text-align:center"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">
+
+<hr size="2" width="100%" align="center">
+
+</span></div>
+
+<h2><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">Turn-in
+Instructions<o:p></o:p></span></h2>
+
+<p><i>Electronic turn-in instructions</i> (<b style="mso-bidi-font-weight:normal"><span style="color:red;mso-bidi-font-style:italic">Make sure that your code compiles
+and that you have turned off all your debugging output!):</span></b></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i) go to the csc501-lab1/compile
+directory and do "make clean".</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ii) go to the directory of which
+your csc501-lab1 directory is a subdirectory (NOTE: please do not rename
+csc501-lab1, or any of its subdirectories.)</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+e.g., if /home/csc501/csc501-lab1 is your directory structure, goto
+/homes/csc501 </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iii) create a subdirectory TMP  (under the directory csc501-lab1)
+and copy all the files you have modified/written, both .c files and .h files
+into the directory. </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iv) compress the csc501-lab1
+directory into a tgz file and use Wolfware's <a href="http://submit.ncsu.edu/">Submit
+Assignment</a> facility. Please only upload one tgz file. </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+tar czf csc501-lab1.tgz csc501-lab1</p>
+
+<p><b><i>You can write code in main.c to test your procedures, but please note
+that when we test your programs we will replace the main.c file! Therefore, do
+not put any functionality in the main.c file.</i></b> </p>
+
+<div class="MsoNormal" align="center" style="text-align:center"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;">
+
+<hr size="2" width="100%" align="center">
+
+</span></div>
+
+<p class="MsoNormal"><span style="mso-fareast-font-family:&quot;Times New Roman&quot;"><a href="http://www.csc2.ncsu.edu/faculty/xjiang4/csc501/index.html">Back to the
+CSC501 web page</a><o:p></o:p></span></p>
+
+</div>
+
+
+
+
+</body></html>
